@@ -7,7 +7,7 @@ import simpleaudio as sa
 tk = tkinter.Tk(className=" PFUK Multimedia Room Sound Test")
 tk.geometry("400x200")
 label = Label(tk, text="Simple Sound Test", font=("Calibri", 30))
-author = Label(tk, text="© 2020 Aja")
+author = Label(tk, text="© 2020 AnP")
 
 # define callbacks
 def leftChannelCallback():
@@ -30,11 +30,8 @@ def rangeChannelCallback():
     wave_obj = sa.WaveObject.from_wave_file(filename)
     play_obj = wave_obj.play()
 
-def stopCallback():
-    filename = "assets/range.wav"
-    # play_obj = sa.WaveObject.from_wave_file(filename)
-    play_obj = sa.play_buffer(0b0, 2, 2, 44100)
-    play_obj.stop()
+def stopAudioCallback():
+    sa.stop_all()
 
 
 # show text
@@ -46,14 +43,14 @@ button1 = tkinter.Button(tk, text ="Left Channel", command = leftChannelCallback
 button2 = tkinter.Button(tk, text ="chord.wav", command = bothChannelCallback)
 button3 = tkinter.Button(tk, text ="Right Channel", command = rightChannelCallback)
 button4 = tkinter.Button(tk, text ="Range 44Hz - 20kHz", command = rangeChannelCallback)
-button5 = tkinter.Button(tk, text ="Stop", command = stopCallback)
+button5 = tkinter.Button(tk, text ="STOP", command = stopAudioCallback, fg="red")
 
 # show buttons
 button1.place(x=30, y=60, height=50, width=100)
 button2.place(x=150, y=60, height=50, width=100)
 button3.place(x=270, y=60, height=50, width=100)
 button4.place(x=140, y=130, height=50, width=120)
-button5.place(x=10, y=130, height=30, width=80)
+button5.place(x=290, y=130, height=50, width=80)
 
 
 if __name__ == "__main__":
