@@ -1,4 +1,4 @@
-import tkinter
+import tkinter, sys, os
 from tkinter import Label
 import simpleaudio as sa
 
@@ -9,24 +9,35 @@ tk.geometry("400x200")
 label = Label(tk, text="Simple Sound Test", font=("Calibri", 30))
 author = Label(tk, text="© 2020 AnP")
 
+# get path (for python 3.8+) to be able to compile as one file using PyInstaller
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 # define callbacks
 def leftChannelCallback():
-    filename = "assets/left.wav"
+    filename = resource_path("assets/left.wav")
     wave_obj = sa.WaveObject.from_wave_file(filename)
     play_obj = wave_obj.play()
 
 def bothChannelCallback():
-    filename = "assets/chord.wav"
+    filename = resource_path("assets/chord.wav")
     wave_obj = sa.WaveObject.from_wave_file(filename)
     play_obj = wave_obj.play()
 
 def rightChannelCallback():
-    filename = "assets/right.wav"
+    filename = resource_path("assets/right.wav")
     wave_obj = sa.WaveObject.from_wave_file(filename)
     play_obj = wave_obj.play()
 
 def rangeChannelCallback():
-    filename = "assets/range.wav"
+    filename = resource_path("assets/range.wav")
     wave_obj = sa.WaveObject.from_wave_file(filename)
     play_obj = wave_obj.play()
 
